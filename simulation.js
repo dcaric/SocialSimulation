@@ -72,23 +72,23 @@ class Agent {
             const dist = this.dist(other);
             if (dist > this.visionRadius) continue;
 
-            if (this.personality.faction === 'Entropics') {
+            if (this.personality.faction === 'Shadows') {
                 if (other.personality.faction === 'Luminaries' || other.personality.faction === 'Inert') {
                     if (!target || dist < this.dist(target)) target = other;
                 }
             } else if (this.personality.faction === 'Luminaries') {
-                if (other.personality.faction === 'Entropics') {
+                if (other.personality.faction === 'Shadows') {
                     if (!threat || dist < this.dist(threat)) threat = other;
                 } else if (other.personality.faction === 'Inert' || other.personality.faction === 'Luminaries') {
                     if (!target || dist < this.dist(target)) target = other;
                 }
             } else if (this.personality.faction === 'Inert') {
-                if (other.personality.faction === 'Entropics') {
+                if (other.personality.faction === 'Shadows') {
                     if (!threat || dist < this.dist(threat)) threat = other;
                 }
             } else if (this.personality.faction === 'Catalysts') {
-                // Catalysts target Entropics to disrupt them
-                if (other.personality.faction === 'Entropics') {
+                // Catalysts target Shadows to disrupt them
+                if (other.personality.faction === 'Shadows') {
                     if (!target || dist < this.dist(target)) target = other;
                 }
                 // Catalysts flee from other Catalysts or Luminaries if they are too strong
@@ -186,7 +186,7 @@ class Agent {
         const faction = this.personality.faction;
         const otherFaction = other.personality.faction;
 
-        if (faction === "Entropics") {
+        if (faction === "Shadows") {
             const myAggression = this.personality.aggression * (this.model.weights.aggression || 1);
             const otherEmpathy = other.personality.empathy * (this.model.weights.empathy || 1);
 
@@ -199,12 +199,12 @@ class Agent {
                     if (this.personality.name === "Reaper") {
                         other.isDeactivated = true;
                     } else {
-                        other.convertToEntropic(this.personality);
+                        other.convertToShadow(this.personality);
                     }
                 }
             }
         } else if (faction === "Luminaries") {
-            if (otherFaction === "Entropics") {
+            if (otherFaction === "Shadows") {
                 const myEmpathy = this.personality.empathy * (this.model.weights.empathy || 1);
                 const otherAggression = other.personality.aggression * (this.model.weights.aggression || 1);
 
@@ -223,13 +223,13 @@ class Agent {
                 }
             }
         } else if (faction === "Catalysts") {
-            if (otherFaction === "Entropics") {
-                // Catalysts disrupt Entropics, reducing their resource and potentially converting them
+            if (otherFaction === "Shadows") {
+                // Catalysts disrupt Shadows, reducing their resource and potentially converting them
                 const disrupt = 0.15;
                 other.resource -= disrupt;
                 this.resource += disrupt * 0.5; // Catalysts gain some resource from disruption
                 this.energy = Math.min(1.0, this.energy + 0.05);
-                if (other.resource <= 0.1 && Math.random() < 0.3) { // Chance to convert weak Entropics to Inert
+                if (other.resource <= 0.1 && Math.random() < 0.3) { // Chance to convert weak Shadows to Inert
                     other.convertToInert();
                 }
             } else if (otherFaction === "Luminaries") {
@@ -259,8 +259,8 @@ class Agent {
         this.radius = Math.max(2, 3 + (this.resource * 4));
     }
 
-    convertToEntropic(sourcePersonality) {
-        this.personality.faction = "Entropics";
+    convertToShadow(sourcePersonality) {
+        this.personality.faction = "Shadows";
         this.color = sourcePersonality.color;
         this.personality.aggression = Math.max(0.8, this.personality.aggression + 0.2); // Aggressive
         this.personality.empathy = 0.0; // Cold (No Halo)
@@ -350,7 +350,7 @@ class Simulation {
             const data = {
                 "personalities": [
                     {
-                        "faction": "Entropics",
+                        "faction": "Shadows",
                         "types": [
                             { "id": 1, "name": "The Void", "color": "#2A0000", "aggression": 1.0, "empathy": 0.0, "energy": 0.2 },
                             { "id": 2, "name": "Berserker", "color": "#FF0000", "aggression": 0.9, "empathy": 0.1, "energy": 0.9 },
@@ -601,7 +601,7 @@ class Simulation {
     }
 
     updateDashboard() {
-        const stats = { Entropics: 0, Luminaries: 0, Catalysts: 0, Inert: 0 };
+        const stats = { Shadows: 0, Luminaries: 0, Catalysts: 0, Inert: 0 };
         let activeCount = 0;
         let totalEnergy = 0;
 
@@ -647,7 +647,7 @@ class Simulation {
             if (count > totalPop * 0.5) return { type: 'dominion', label: `👑 ${faction.toUpperCase()} AGE` };
         }
 
-        if (stats['Entropics'] > totalPop * 0.4) return { type: 'chaos', label: '🔥 CHAOS' };
+        if (stats['Shadows'] > totalPop * 0.4) return { type: 'chaos', label: '🔥 CHAOS' };
 
         return { type: 'stable', label: '⚖️ STABLE' };
     }
@@ -715,7 +715,7 @@ class Simulation {
             }
         }
 
-        const factions = ['Entropics', 'Luminaries', 'Catalysts', 'Inert'];
+        const factions = ['Shadows', 'Luminaries', 'Catalysts', 'Inert'];
 
         factions.forEach(faction => {
             const group = document.createElement('div');
@@ -723,7 +723,7 @@ class Simulation {
 
             const title = document.createElement('h4');
             title.textContent = faction;
-            if (faction === 'Entropics') title.style.color = 'var(--entropic-color)';
+            if (faction === 'Shadows') title.style.color = 'var(--shadow-color)';
             if (faction === 'Luminaries') title.style.color = 'var(--luminary-color)';
             if (faction === 'Catalysts') title.style.color = 'var(--catalyst-color)';
             if (faction === 'Inert') title.style.color = 'var(--inert-color)';
@@ -756,19 +756,23 @@ class Simulation {
     }
 
     generateReport() {
-        const stats = { Entropics: 0, Luminaries: 0, Catalysts: 0, Inert: 0 };
+        const stats = { Shadows: 0, Luminaries: 0, Catalysts: 0, Inert: 0 };
+        const typeStats = { Shadows: {}, Luminaries: {}, Catalysts: {}, Inert: {} };
         let activeCount = 0;
 
         this.agents.forEach(a => {
             if (!a.isDeactivated) {
-                stats[a.personality.faction]++;
+                const faction = a.personality.faction;
+                const typeName = a.personality.name;
+                stats[faction]++;
+                typeStats[faction][typeName] = (typeStats[faction][typeName] || 0) + 1;
                 activeCount++;
             }
         });
 
         if (activeCount === 0) return "The simulation is empty. Life has not yet begun (or has ended).";
 
-        const pEntropics = Math.round((stats.Entropics / activeCount) * 100);
+        const pShadows = Math.round((stats.Shadows / activeCount) * 100);
         const pLuminaries = Math.round((stats.Luminaries / activeCount) * 100);
         const pCatalysts = Math.round((stats.Catalysts / activeCount) * 100);
         const pInert = Math.round((stats.Inert / activeCount) * 100);
@@ -776,8 +780,8 @@ class Simulation {
         let report = `🌍 **World Status Report**\n\n`;
 
         // 1. Dominance Check
-        if (pEntropics > 50) {
-            report += `🔥 **Darkness Reigns**: The **Entropics** have crushed the opposition and control ${pEntropics}% of the population. It is a hostile world.\n`;
+        if (pShadows > 50) {
+            report += `🌑 **Darkness Reigns**: The **Shadows** have crushed the opposition and control ${pShadows}% of the population. It is a hostile world.\n`;
         } else if (pLuminaries > 50) {
             report += `✨ **Age of Light**: The **Luminaries** are prospering, accounting for ${pLuminaries}% of life. Cooperation is the dominant strategy.\n`;
         } else if (pInert > 50) {
@@ -792,7 +796,7 @@ class Simulation {
 
         // 2. Extinction Check
         const extinct = [];
-        if (pEntropics === 0) extinct.push("Entropics");
+        if (pShadows === 0) extinct.push("Shadows");
         if (pLuminaries === 0) extinct.push("Luminaries");
         if (pCatalysts === 0) extinct.push("Catalysts");
         if (pInert === 0) extinct.push("Inert");
@@ -801,7 +805,22 @@ class Simulation {
             report += `💀 **Extinction Event**: The ${extinct.join(', ')} faction(s) have been completely wiped out.\n`;
         }
 
-        // 3. Phase Analysis
+        // 3. Detailed Population Breakdown
+        report += `📊 **Population Breakdown**\n`;
+        Object.keys(typeStats).forEach(faction => {
+            const types = Object.entries(typeStats[faction])
+                .filter(([name, count]) => count > 0)
+                .sort((a, b) => b[1] - a[1]);
+
+            if (types.length > 0) {
+                report += `\n**${faction}**:\n`;
+                types.forEach(([name, count]) => {
+                    report += `- ${name}: ${count}\n`;
+                });
+            }
+        });
+
+        // 4. Phase Analysis
         const phase = this.calculateWorldPhase(stats);
         report += `\n⏳ **Current Phase**: ${phase.label} (${phase.type.toUpperCase()})\n`;
 

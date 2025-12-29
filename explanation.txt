@@ -13,10 +13,10 @@ Fix Applied: I added a safety check in the code so it will now correctly display
 
 
 
-This image represents the Dominion phase, specifically by the Entropics (Red Faction).
+This image represents the Dominion phase, specifically by the Shadows (Red Faction).
 
 What happened?
-The Entropics act on Zero-Sum logic (I win, you lose).
+The Shadows act on Zero-Sum logic (I win, you lose).
 They likely hunted down the cooperative factions (Luminaries) early on.
 Once they gained a critical mass (>50%), they snowballed. The massive 
 circles show that a few individuals now hold 90% of the world's resources.
@@ -33,5 +33,30 @@ The small dots are starving while the giants keep growing.
 Ecological Collapse: 
 In nature, if predators eat all the prey, 
 they eventually starve too. This simulation might head toward 
-COLLAPSE next if the Entropics run out of victims.
+COLLAPSE next if the Shadows run out of victims.
 
+
+
+
+🧪 What does this Prove?
+Based on the emergent behaviors we've just witnessed (Red Giants, Nuclei, 
+Black Holes), this simulation mathematically "proves" three key sociological 
+and physical concepts:
+
+The "Red Giant" Paradox (Monopolies are Inevitable)
+    Proof: In a system with uncapped gains, the most aggressive agents (Shadows) 
+    will inevitably consume all competition.
+    Result: This leads to a Monopoly (one Giant Red Circle) where innovation dies 
+    and the system stagnates ("Heat Death"). Aggression wins the battle but kills the war.
+
+The "Nucleus" Effect (Cooperation = Size)
+    Proof: The visually largest agents in your screenshots were actually Blue (Inert 
+    agents protected by White).
+    Result: This proves that Symbiosis (Cooperation) allows beings to grow larger and 
+    more resilient than they ever could alone. A "Cell" is stronger than a "Virus".
+
+Emergence requires no Design
+    Proof: We never programmed "Gravity", "Solar Systems", or "Cells". We only 
+    programmed "Hunger" and "Sharing".
+    Result: Complex structures emerge automatically from simple incentives. 
+    You don't need a "God" to design a solar system; you just need gravity and time.

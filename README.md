@@ -11,7 +11,7 @@ A web-based **Agent-Based Model (ABM)** that simulates the emergence of social s
 ### Core Simulation
 - **500 Autonomous Agents**: Each with energy, resources, and one of 40 unique personality types (e.g., "Reaper", "Monk", "Glitch", "Citizen").
 - **4 Distinct Factions**:
-    - **🌑 Entropics (Predators)**: Seek to consume and convert others. Logic: *Zero-Sum*.
+    - **🌑 Shadows (Predators)**: Seek to consume and convert others. Logic: *Zero-Sum*.
     - **☀️ Luminaries (Protectors)**: Form clusters to heal and share resources. Logic: *Positive-Sum*.
     - **🧪 Catalysts (Chaotic)**: Trigger random state changes and disrupt stagnation. Logic: *Mutation*.
 - **Visual Indicators**:
@@ -111,6 +111,8 @@ simulation/
 ## 🧠 The Core Theory
 
 This project explores **Digital Physics**—the idea that the universe can be described as information processing. By defining simple rules for individual agents (move, eat, share, flee), complex "macroscopic" behaviors emerge that resemble real-world social dynamics: segregation, war, cooperation, and economic collapse.
+
+Gravity = Information + Desire
 
 ---
 *Created for the Advanced Agentic Coding project.*

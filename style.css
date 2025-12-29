@@ -5,7 +5,7 @@
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
 
-    --entropic-color: #ff4d4d;
+    --shadow-color: #ff4d4d;
     /* Using a visible dark red instead of true black for visibility */
     --luminary-color: #ffd700;
     --catalyst-color: #39ff14;
@@ -500,6 +500,7 @@ input[type=range] {
         transform: translateX(0);
     }
 }
+
 /* Legend Styles - Force Append */
 .legend-grid-container {
     display: grid;
@@ -535,7 +536,7 @@ input[type=range] {
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.2);
     /* Ensure background color shows */
-    background-color: currentColor; 
+    background-color: currentColor;
     flex-shrink: 0;
 }
 
@@ -548,7 +549,8 @@ input[type=range] {
     font-size: 1.1rem;
     line-height: 1.6;
     color: #eee;
-    white-space: pre-wrap; /* Preserve line breaks */
+    white-space: pre-wrap;
+    /* Preserve line breaks */
 }
 
 .report-highlight {

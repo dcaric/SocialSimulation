@@ -45,19 +45,19 @@ class SocialAgent(mesa.Agent):
             dist = self.model.grid.get_distance(self.pos, other.pos)
             
             # Faction logic
-            if self.personality["faction"] == "Entropics":
+            if self.personality["faction"] == "Shadows":
                 if other.personality["faction"] in ["Luminaries", "Inert"]:
                     if not target or dist < self.model.grid.get_distance(self.pos, target.pos):
                         target = other
             elif self.personality["faction"] == "Luminaries":
-                if other.personality["faction"] == "Entropics":
+                if other.personality["faction"] == "Shadows":
                     if not threat or dist < self.model.grid.get_distance(self.pos, threat.pos):
                         threat = other
                 elif other.personality["faction"] in ["Inert", "Luminaries"]:
                     if not target or dist < self.model.grid.get_distance(self.pos, target.pos):
                         target = other
             elif self.personality["faction"] == "Inert":
-                if other.personality["faction"] == "Entropics":
+                if other.personality["faction"] == "Shadows":
                     if not threat or dist < self.model.grid.get_distance(self.pos, threat.pos):
                         threat = other
 
@@ -123,7 +123,7 @@ class SocialAgent(mesa.Agent):
         faction = self.personality["faction"]
         other_faction = other.personality["faction"]
 
-        if faction == "Entropics":
+        if faction == "Shadows":
             if self.personality["aggression"] > other.personality["empathy"]:
                 drain = 0.01
                 other.resource -= drain
@@ -131,7 +131,7 @@ class SocialAgent(mesa.Agent):
                 self.energy = min(1.0, self.energy + 0.1)
                 
                 if other.resource <= 0:
-                    other.convert_to_entropic(self.personality)
+                    other.convert_to_shadow(self.personality)
         elif faction == "Luminaries":
             if other_faction == "Inert":
                 other.convert_to_luminary(self.personality)
@@ -144,7 +144,7 @@ class SocialAgent(mesa.Agent):
                 self.resource = 0.5
                 break
 
-    def convert_to_entropic(self, source_p):
+    def convert_to_shadow(self, source_p):
         self.personality = source_p
         self.resource = 0.2
 
