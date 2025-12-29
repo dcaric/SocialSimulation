@@ -27,6 +27,19 @@ A web-based **Agent-Based Model (ABM)** that simulates the emergence of social s
 - **⚡ Glitch (Deja Vu)**: Triggers a system-wide race condition, teleporting 20% of agents to random coordinates. Useful for breaking up clusters.
 - **👁️ Observer (Quantum Collapse)**: Simulates the "Observer Effect" by collapsing the momentum of all agents, freezing them in place until physics takes over again.
 
+## 🧬 Personality Engine
+
+The core diversity of the simulation is driven by the **`personalities.json`** configuration file. It defines:
+
+*   **40 Unique Types**: Mapped across 4 factions.
+*   **Attributes**: 
+    *   `aggression`: Likelihood to hunt.
+    *   `empathy`: Likelihood to share resources.
+    *   `metabolism`: Energy consumption rate.
+    *   `influence`: Ability to convert others.
+
+👉 **[View Full Configuration (personalities.json)](personalities.json)**
+
 ## 🛠️ Technology Stack
 
 - **Backend**: Python 3.9+, Mesa (ABM), FastAPI (API), Uvicorn (Server).
