@@ -4,7 +4,7 @@
 
 A web-based **Agent-Based Model (ABM)** that simulates the emergence of social structures, factions, and "heat death" in a closed system. It features a **Hybrid Architecture** where a Python backend (Mesa) handles the physics and agent logic, while a JavaScript frontend provides high-performance visualization.
 
-![Simulation Screenshot](https://raw.githubusercontent.com/user/project/main/screenshot.png) *(Replace with actual screenshot if hosted)*
+![Simulation Screenshot](https://raw.githubusercontent.com/user/project/main/sim.png) *(Replace with actual screenshot if hosted)*
 
 ## 🌟 Features
 

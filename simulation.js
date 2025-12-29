@@ -532,6 +532,14 @@ class Simulation {
         document.getElementById('observerBtn').addEventListener('click', () => this.triggerObserver());
         document.getElementById('speedSlider').addEventListener('input', (e) => this.speed = parseFloat(e.target.value));
 
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            document.querySelector('.dashboard').classList.add('active');
+        });
+
+        document.getElementById('sidebarClose').addEventListener('click', () => {
+            document.querySelector('.dashboard').classList.remove('active');
+        });
+
         const modal = document.getElementById('infoModal');
         document.getElementById('infoBtn').addEventListener('click', () => modal.style.display = 'block');
         document.querySelector('.close-btn').addEventListener('click', () => modal.style.display = 'none');

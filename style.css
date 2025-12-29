@@ -71,6 +71,10 @@ header {
     transform: rotate(15deg);
 }
 
+.mobile-only {
+    display: none;
+}
+
 h1 {
     font-family: var(--font-heading);
     font-weight: 600;
@@ -111,19 +115,7 @@ main {
     display: block;
 }
 
-.controls {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-radius: 999px;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-}
+/* Removed old .controls absolute positioning */
 
 .glass {
     background: var(--glass-bg);
@@ -178,6 +170,10 @@ button {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    height: 100%;
+    /* Force full height of the grid cell */
+    overflow: hidden;
+    /* Prevent growing beyond container */
 }
 
 h3 {
@@ -263,6 +259,24 @@ h3 {
     color: #fff;
 }
 
+.close-sidebar-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 101;
+    display: none;
+    /* Only for mobile */
+}
+
+.close-sidebar-btn:hover {
+    color: #fff;
+}
+
 .modal-content h2 {
     font-family: var(--font-heading);
     margin-bottom: 2rem;
@@ -324,6 +338,8 @@ h3 {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    margin-bottom: 1rem;
+    /* Ensure space for bottom controls */
 }
 
 .log-content {
@@ -331,6 +347,8 @@ h3 {
     overflow-y: auto;
     font-size: 0.75rem;
     color: #888;
+    min-height: 100px;
+    /* Prevent shrinking too much */
 }
 
 .log-entry {
@@ -345,9 +363,11 @@ footer {
 
 .observer-powers {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    /* logic moved to inline styles or structure */
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    /* Reduced gap */
 }
 
 #glitchBtn {
@@ -375,4 +395,48 @@ footer {
 
 input[type=range] {
     accent-color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #app {
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    main {
+        display: block;
+        /* Remove grid to fix black space */
+    }
+
+    .simulation-container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .dashboard {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        background: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--glass-border);
+    }
+
+    .dashboard .close-sidebar-btn {
+        display: block;
+    }
+
+    .dashboard.active {
+        transform: translateX(0);
+    }
 }

@@ -25,7 +25,7 @@ class SocialAgent(mesa.Agent):
             self.convert_to_inert()
             return
 
-        self.energy -= 0.0002
+        self.energy -= 0.00005
         self.think()
         self.move()
 
@@ -125,7 +125,7 @@ class SocialAgent(mesa.Agent):
 
         if faction == "Entropics":
             if self.personality["aggression"] > other.personality["empathy"]:
-                drain = 0.05
+                drain = 0.01
                 other.resource -= drain
                 self.resource += drain
                 self.energy = min(1.0, self.energy + 0.1)

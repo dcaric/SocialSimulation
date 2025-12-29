@@ -15,7 +15,10 @@
         <header>
             <div class="header-main">
                 <h1>Social Simulation</h1>
-                <button id="infoBtn" class="icon-btn" title="Faction Information">ⓘ</button>
+                <div class="header-controls">
+                    <button id="infoBtn" class="icon-btn" title="Faction Information">ⓘ</button>
+                    <button id="sidebarToggle" class="icon-btn mobile-only" title="Toggle Dashboard">☰</button>
+                </div>
             </div>
             <p class="subtitle">Exploring Emergent Behaviors & Digital Physics</p>
         </header>
@@ -23,17 +26,21 @@
         <main>
             <div class="simulation-container">
                 <canvas id="simCanvas"></canvas>
-                <div class="controls glass">
-                    <button id="startBtn" class="primary-btn">START SIMULATION</button>
-                    <button id="restartBtn" class="secondary-btn">RESTART</button>
-                    <div class="stats-mini">
-                        <span id="popCount">Agents: 500</span>
-                        <span id="entropyLevel">Entropy: 0.50</span>
-                    </div>
-                </div>
             </div>
 
             <aside class="dashboard glass">
+                <button id="sidebarClose" class="close-sidebar-btn">&times;</button>
+                <section class="controls-section">
+                    <h3>Simulation Controls</h3>
+                    <div class="main-controls">
+                        <button id="startBtn" class="primary-btn">START SIMULATION</button>
+                        <button id="restartBtn" class="secondary-btn">RESTART</button>
+                    </div>
+                    <div class="stats-mini" style="margin-top: 1rem;">
+                        <span id="popCount">Agents: 500</span>
+                        <span id="entropyLevel">Entropy: 0.50</span>
+                    </div>
+                </section>
                 <section class="faction-stats">
                     <h3>Faction Distribution</h3>
                     <div class="stat-row" data-faction="Entropics">
@@ -72,20 +79,25 @@
                         <p class="log-entry">Waiting for genesis...</p>
                     </div>
                 </section>
+
+                <section class="god-mode-controls"
+                    style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                    <h3>Observer Powers</h3>
+                    <div class="observer-powers" style="flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; gap: 1rem; width: 100%;">
+                            <button id="glitchBtn" title="Trigger Deja Vu Pulse" style="flex: 1;">⚡ GLITCH</button>
+                            <button id="observerBtn" title="Trigger Quantum Collapse" style="flex: 1;">👁️
+                                OBSERVE</button>
+                        </div>
+                        <div class="speed-control" style="width: 100%; justify-content: space-between;">
+                            <label>Sim Speed</label>
+                            <input type="range" id="speedSlider" min="0.1" max="3" step="0.1" value="1"
+                                style="flex: 1; margin-left: 1rem;">
+                        </div>
+                    </div>
+                </section>
             </aside>
         </main>
-
-        <footer>
-            <div class="observer-powers">
-                <button id="glitchBtn" title="Trigger Deja Vu Pulse">⚡ GLITCH</button>
-                <button id="observerBtn" title="Trigger Quantum Collapse" style="margin-left: 10px;">👁️
-                    OBSERVE</button>
-                <div class="speed-control">
-                    <label>Sim Speed</label>
-                    <input type="range" id="speedSlider" min="0.1" max="3" step="0.1" value="1">
-                </div>
-            </div>
-        </footer>
     </div>
     <div id="infoModal" class="modal">
         <div class="modal-content glass">
