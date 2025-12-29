@@ -192,7 +192,7 @@ class Agent {
                 }
             }
         }
-        this.radius = 3 + (this.resource * 4);
+        this.radius = Math.max(2, 3 + (this.resource * 4));
     }
 
     convertToEntropic(sourcePersonality) {
@@ -218,7 +218,8 @@ class Agent {
     draw(ctx) {
         if (this.isDeactivated) return;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        const safeRadius = Math.max(2, this.radius);
+        ctx.arc(this.x, this.y, safeRadius, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
         ctx.fill();
         if (this.personality.empathy > 0.8) {
@@ -395,7 +396,7 @@ class Simulation {
                 this.agents[i].resource = d.resource;
                 this.agents[i].energy = d.energy;
                 this.agents[i].state = d.state;
-                this.agents[i].radius = 3 + (d.resource * 4);
+                this.agents[i].radius = Math.max(2, 3 + (d.resource * 4));
                 // Simple color sync for faction changes
                 if (this.agents[i].personality.faction !== d.faction) {
                     const p = this.personalities.find(pers => pers.faction === d.faction);
@@ -447,7 +448,8 @@ class Simulation {
             if (this.isRunning && !a.isDeactivated && a.state === 'HUNT') {
                 this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
                 this.ctx.beginPath();
-                this.ctx.arc(a.x, a.y, a.radius + 2, 0, Math.PI * 2);
+                const huntRadius = Math.max(2, a.radius);
+                this.ctx.arc(a.x, a.y, huntRadius + 2, 0, Math.PI * 2);
                 this.ctx.stroke();
             }
         });
