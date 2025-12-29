@@ -16,6 +16,7 @@
             <div class="header-main">
                 <h1>Social Simulation</h1>
                 <div class="header-controls">
+                    <button id="legendBtn" class="icon-btn" title="Color Legend">📖</button>
                     <button id="infoBtn" class="icon-btn" title="Faction Information">ⓘ</button>
                     <button id="sidebarToggle" class="icon-btn mobile-only" title="Toggle Dashboard">☰</button>
                 </div>
@@ -71,6 +72,34 @@
                             <div class="bar" style="width: 25%; background: var(--inert-color);"></div>
                         </div>
                         <div class="value">25%</div>
+                    </div>
+                </section>
+
+                <section class="world-modifiers"
+                    style="border-top: 1px solid var(--glass-border); padding-top: 1rem; margin-top: 1rem;">
+                    <h3>World Modifiers</h3>
+                    <div class="modifier-row" style="margin-bottom: 0.5rem;">
+                        <label style="display: flex; justify-content: space-between;">
+                            <span>⚔️ Aggression</span>
+                            <span id="val-aggression">1.0x</span>
+                        </label>
+                        <input type="range" id="globalAggression" min="0" max="2" step="0.1" value="1"
+                            style="width: 100%;">
+                    </div>
+                    <div class="modifier-row" style="margin-bottom: 0.5rem;">
+                        <label style="display: flex; justify-content: space-between;">
+                            <span>❤️ Empathy</span>
+                            <span id="val-empathy">1.0x</span>
+                        </label>
+                        <input type="range" id="globalEmpathy" min="0" max="2" step="0.1" value="1"
+                            style="width: 100%;">
+                    </div>
+                    <div class="modifier-row">
+                        <label style="display: flex; justify-content: space-between;">
+                            <span>⚡ Energy</span>
+                            <span id="val-energy">1.0x</span>
+                        </label>
+                        <input type="range" id="globalEnergy" min="0" max="2" step="0.1" value="1" style="width: 100%;">
                     </div>
                 </section>
 
@@ -155,6 +184,15 @@
                     resetting their perception of time and space. Use it to break up "Heat Death" or to rescue a dying
                     faction.
                 </p>
+            </div>
+        </div>
+    </div>
+    <div id="legendModal" class="modal">
+        <div class="modal-content glass" style="max-width: 800px;">
+            <span class="close-btn-legend close-btn">&times;</span>
+            <h2>Visual Legend</h2>
+            <div id="legendContainer" class="legend-grid-container">
+                <!-- Populated by JS -->
             </div>
         </div>
     </div>

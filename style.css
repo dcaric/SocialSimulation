@@ -172,7 +172,7 @@ button {
     gap: 1.5rem;
     height: 100%;
     /* Force full height of the grid cell */
-    overflow: hidden;
+    overflow-y: auto;
     /* Prevent growing beyond container */
 }
 
@@ -499,4 +499,42 @@ input[type=range] {
     .dashboard.active {
         transform: translateX(0);
     }
+}
+/* Legend Styles - Force Append */
+.legend-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.legend-faction-group h4 {
+    color: #fff;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.3rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Ensure background color shows */
+    background-color: currentColor; 
+    flex-shrink: 0;
 }

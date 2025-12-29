@@ -4,7 +4,7 @@
  */
 
 class Agent {
-    constructor(id, personality, x, y, canvasWidth, canvasHeight) {
+    constructor(id, personality, x, y, canvasWidth, canvasHeight, model) {
         this.id = id;
         this.personality = { ...personality };
         this.baseColor = personality.color;
@@ -17,13 +17,14 @@ class Agent {
 
         // World bounds
         this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
+        this.model = model; // Reference to main model for interactions
+
+        // Stats
         this.entropy = 0;
         this.ticks = 0; // Track simulation age
         this.resource = 0.5;
         this.isDeactivated = false;
-        this.canvasWidth = canvasWidth; // This line was duplicated in the original request, keeping it as per instruction.
-        this.canvasHeight = canvasHeight;
-        this.model = model; // Reference to main model for bounds access
 
         // AI Properties
         this.visionRadius = 60;
@@ -92,7 +93,10 @@ class Agent {
                 }
                 // Catalysts flee from other Catalysts or Luminaries if they are too strong
                 if (other.personality.faction === 'Catalysts' || other.personality.faction === 'Luminaries') {
-                    if (other.personality.aggression > this.personality.aggression && (!threat || dist < this.dist(threat))) {
+                    const otherAggression = other.personality.aggression * (this.model.weights.aggression || 1);
+                    const myAggression = this.personality.aggression * (this.model.weights.aggression || 1);
+
+                    if (otherAggression > myAggression && (!threat || dist < this.dist(threat))) {
                         threat = other;
                     }
                 }
@@ -139,7 +143,7 @@ class Agent {
         const dy = target.y - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist === 0) return;
-        const speed = (this.personality.energy || 0.5) * 2;
+        const speed = (this.personality.energy || 0.5) * 2 * (this.model.weights.energy || 1);
         const desireX = (dx / dist) * speed;
         const desireY = (dy / dist) * speed;
         this.vx += (desireX - this.vx) * 0.1 * dt;
@@ -151,7 +155,7 @@ class Agent {
         const dy = threat.y - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist === 0) return;
-        const speed = (this.personality.energy || 0.5) * 2;
+        const speed = (this.personality.energy || 0.5) * 2 * (this.model.weights.energy || 1);
         const desireX = (-dx / dist) * speed * 1.5;
         const desireY = (-dy / dist) * speed * 1.5;
         this.vx += (desireX - this.vx) * 0.1 * dt;
@@ -183,7 +187,10 @@ class Agent {
         const otherFaction = other.personality.faction;
 
         if (faction === "Entropics") {
-            if (this.personality.aggression > other.personality.empathy) {
+            const myAggression = this.personality.aggression * (this.model.weights.aggression || 1);
+            const otherEmpathy = other.personality.empathy * (this.model.weights.empathy || 1);
+
+            if (myAggression > otherEmpathy) {
                 const drain = 0.1;
                 other.resource -= drain;
                 this.resource += drain;
@@ -198,7 +205,10 @@ class Agent {
             }
         } else if (faction === "Luminaries") {
             if (otherFaction === "Entropics") {
-                if (this.personality.empathy > other.personality.aggression) {
+                const myEmpathy = this.personality.empathy * (this.model.weights.empathy || 1);
+                const otherAggression = other.personality.aggression * (this.model.weights.aggression || 1);
+
+                if (myEmpathy > otherAggression) {
                     other.resource -= 0.05;
                     this.resource += 0.02;
                 }
@@ -252,14 +262,16 @@ class Agent {
     convertToEntropic(sourcePersonality) {
         this.personality.faction = "Entropics";
         this.color = sourcePersonality.color;
-        this.personality.aggression = Math.max(0.5, this.personality.aggression);
-        this.energy = 0.5;
+        this.personality.aggression = Math.max(0.8, this.personality.aggression + 0.2); // Aggressive
+        this.personality.empathy = 0.0; // Cold (No Halo)
+        this.personality.energy = 0.8; // High energy
     }
 
     convertToLuminary(sourcePersonality) {
         this.personality.faction = "Luminaries";
         this.color = sourcePersonality.color;
-        this.personality.empathy = Math.max(0.7, this.personality.empathy);
+        this.personality.empathy = Math.max(0.8, this.personality.empathy + 0.1); // High Empathy (Halo)
+        this.personality.aggression = 0.1; // Gentle
     }
 
     convertToInert() {
@@ -278,6 +290,9 @@ class Agent {
 
     draw(ctx) {
         if (this.isDeactivated) return;
+        // Use global energy to pulse size slightly
+        const pulse = (this.model.weights.energy > 1.5) ? Math.sin(Date.now() / 200) * 2 : 0;
+
         ctx.beginPath();
         const safeRadius = Math.max(2, this.radius);
         ctx.arc(this.x, this.y, safeRadius, 0, Math.PI * 2);
@@ -311,6 +326,9 @@ class Simulation {
         // this.animate() called at end of init
 
         window.addEventListener('resize', () => this.resize());
+
+        // Global World Weights
+        this.weights = { aggression: 1.0, empathy: 1.0, energy: 1.0 };
     }
 
     async loadData() {
@@ -503,11 +521,8 @@ class Simulation {
 
     render() {
         this.ctx.fillStyle = '#111';
-        // The following line was part of the user's requested edit.
-        // It appears to be an incomplete or misplaced line as 'SocialAgent' and 'p' are undefined in this context.
-        // For syntactic correctness and to avoid runtime errors, this line is commented out.
-        // If 'SocialAgent' is a new class or 'p' is meant to be defined, further instructions would be needed.
-        // const a = new SocialAgent(this, p, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height); // Clear screen!
+
         this.agents.forEach(a => {
             a.draw(this.ctx);
             if (this.isRunning && !a.isDeactivated && a.state === 'HUNT') {
@@ -636,6 +651,78 @@ class Simulation {
         document.getElementById('infoBtn').addEventListener('click', () => modal.style.display = 'block');
         document.querySelector('.close-btn').addEventListener('click', () => modal.style.display = 'none');
         window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+        // World Modifiers Listeners
+        ['Agreement', 'Empathy', 'Energy'].forEach(trait => {
+            const id = `global${trait}`;
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', (e) => {
+                    const val = parseFloat(e.target.value);
+                    this.weights[trait.toLowerCase()] = val;
+                    document.getElementById(`val-${trait.toLowerCase()}`).textContent = `${val.toFixed(1)}x`;
+                });
+            }
+        });
+        // Typo in array above, fixing manually for specific IDs
+        document.getElementById('globalAggression').addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            this.weights.aggression = val;
+            document.getElementById('val-aggression').textContent = `${val.toFixed(1)}x`;
+        });
+
+        // Legend Modal
+        const legendModal = document.getElementById('legendModal');
+        document.getElementById('legendBtn').addEventListener('click', () => {
+            this.populateLegend();
+            legendModal.style.display = 'block';
+        });
+        document.querySelector('.close-btn-legend').addEventListener('click', () => legendModal.style.display = 'none');
+        window.addEventListener('click', (e) => { if (e.target === legendModal) legendModal.style.display = 'none'; });
+    }
+
+    populateLegend() {
+        const container = document.getElementById('legendContainer');
+        if (container.children.length > 0) return; // Already populated
+
+        const factions = ['Entropics', 'Luminaries', 'Catalysts', 'Inert'];
+
+        factions.forEach(faction => {
+            const group = document.createElement('div');
+            group.className = 'legend-faction-group';
+
+            const title = document.createElement('h4');
+            title.textContent = faction;
+            if (faction === 'Entropics') title.style.color = 'var(--entropic-color)';
+            if (faction === 'Luminaries') title.style.color = 'var(--luminary-color)';
+            if (faction === 'Catalysts') title.style.color = 'var(--catalyst-color)';
+            if (faction === 'Inert') title.style.color = 'var(--inert-color)';
+            group.appendChild(title);
+
+            const factionTypes = this.personalities.filter(p => p.faction === faction);
+            factionTypes.forEach(type => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch';
+                swatch.style.backgroundColor = type.color;
+
+                // Add halo for high empathy
+                if (type.empathy > 0.8) {
+                    swatch.style.boxShadow = `0 0 4px ${type.color}`;
+                }
+
+                const name = document.createElement('span');
+                name.textContent = type.name;
+
+                item.appendChild(swatch);
+                item.appendChild(name);
+                group.appendChild(item);
+            });
+
+            container.appendChild(group);
+        });
     }
 
     resize() {
