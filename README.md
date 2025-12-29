@@ -14,8 +14,17 @@ A web-based **Agent-Based Model (ABM)** that simulates the emergence of social s
     - **🌑 Entropics (Predators)**: Seek to consume and convert others. Logic: *Zero-Sum*.
     - **☀️ Luminaries (Protectors)**: Form clusters to heal and share resources. Logic: *Positive-Sum*.
     - **🧪 Catalysts (Chaotic)**: Trigger random state changes and disrupt stagnation. Logic: *Mutation*.
-    - **🔘 Inert (Neutral)**: The base population, serving as resources or converts. Logic: *Background*.
-- **Dynamic Physics**: Torus world (screen wrap), steering behaviors (Hunt/Flee), and collision detection.
+- **Visual Indicators**:
+    - **Outer Glowing Halo**: Represents the agent's **Resource Radius**. It grows as they eat or gain energy (`radius = 3 + resource * 4`).
+    - **Inner Circle**: The agent's **physical body**. When the radius gets huge, the transparency effects overlap, creating a deep "black hole" look in the center.
+
+### World Phases (Semaphore)
+The dashboard displays the current state of the simulation:
+- **🌱 GENESIS**: Starts here (first few seconds).
+- **⚖️ STABLE**: Normal operation with balanced factions.
+- **🔥 CHAOS**: If entropy or aggression spikes (high chaos).
+- **👑 DOMINION**: If one faction takes over >50% of the population.
+- **💀 COLLAPSE**: If population drops critically (<100 agents).
 
 ### Hybrid Architecture
 - **Python Backend**: Uses the **Mesa** library for robust agent-based modeling and **FastAPI** to state synchronization.

@@ -17,12 +17,11 @@ class Agent {
 
         // World bounds
         this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
-
-        // Stats
-        this.energy = 1.0;
+        this.entropy = 0;
+        this.ticks = 0; // Track simulation age
         this.resource = 0.5;
         this.isDeactivated = false;
+        this.canvasHeight = canvasHeight;
 
         // AI Properties
         this.visionRadius = 60;
@@ -436,6 +435,7 @@ class Simulation {
             if (!grid.data[key]) grid.data[key] = [];
             grid.data[key].push(a);
         });
+        if (this.isRunning) this.ticks++;
         this.agents.forEach(a => a.update(this.agents, dt, grid));
     }
 
@@ -522,6 +522,29 @@ class Simulation {
                 row.querySelector('.value').textContent = `${Math.round(pct)}%`;
             }
         });
+
+        const statusEl = document.getElementById('worldStatus');
+        if (statusEl) {
+            const phase = this.calculateWorldPhase(stats);
+            statusEl.classList.remove('status-genesis', 'status-stable', 'status-chaos', 'status-dominion', 'status-collapse');
+            statusEl.classList.add(`status-${phase.type}`);
+            statusEl.textContent = `PHASE: ${phase.label}`;
+        }
+    }
+
+    calculateWorldPhase(stats) {
+        if (this.ticks < 500) return { type: 'genesis', label: '🌱 GENESIS' };
+
+        const totalPop = Object.values(stats).reduce((a, b) => a + b, 0);
+        if (totalPop < 100) return { type: 'collapse', label: '💀 COLLAPSE' };
+
+        for (const [faction, count] of Object.entries(stats)) {
+            if (count > totalPop * 0.5) return { type: 'dominion', label: `👑 ${faction.toUpperCase()} AGE` };
+        }
+
+        if (stats['Entropics'] > totalPop * 0.4) return { type: 'chaos', label: '🔥 CHAOS' };
+
+        return { type: 'stable', label: '⚖️ STABLE' };
     }
 
     setupListeners() {
