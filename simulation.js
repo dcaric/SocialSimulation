@@ -513,8 +513,10 @@ class Simulation {
         });
 
         document.getElementById('popCount').textContent = `Agents: ${activeCount}`;
-        const entropy = activeCount > 0 ? 1 - (totalEnergy / activeCount) : 1;
-        document.getElementById('entropyLevel').textContent = `Entropy: ${entropy.toFixed(2)}`;
+        document.getElementById('popCount').textContent = `Agents: ${activeCount}`;
+        let entropy = activeCount > 0 ? 1 - (totalEnergy / activeCount) : 1;
+        if (isNaN(entropy)) entropy = 0.5; // Fallback for safety
+        document.getElementById('entropyLevel').textContent = `Entropy: ${(entropy).toFixed(2)}`;
 
         Object.keys(stats).forEach(f => {
             const pct = activeCount > 0 ? (stats[f] / activeCount) * 100 : 0;
