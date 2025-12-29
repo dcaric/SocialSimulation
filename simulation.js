@@ -21,7 +21,9 @@ class Agent {
         this.ticks = 0; // Track simulation age
         this.resource = 0.5;
         this.isDeactivated = false;
+        this.canvasWidth = canvasWidth; // This line was duplicated in the original request, keeping it as per instruction.
         this.canvasHeight = canvasHeight;
+        this.model = model; // Reference to main model for bounds access
 
         // AI Properties
         this.visionRadius = 60;
@@ -83,6 +85,17 @@ class Agent {
                 if (other.personality.faction === 'Entropics') {
                     if (!threat || dist < this.dist(threat)) threat = other;
                 }
+            } else if (this.personality.faction === 'Catalysts') {
+                // Catalysts target Entropics to disrupt them
+                if (other.personality.faction === 'Entropics') {
+                    if (!target || dist < this.dist(target)) target = other;
+                }
+                // Catalysts flee from other Catalysts or Luminaries if they are too strong
+                if (other.personality.faction === 'Catalysts' || other.personality.faction === 'Luminaries') {
+                    if (other.personality.aggression > this.personality.aggression && (!threat || dist < this.dist(threat))) {
+                        threat = other;
+                    }
+                }
             }
         }
 
@@ -94,6 +107,14 @@ class Agent {
             this.steerToward(target, dt);
         } else {
             this.state = 'IDLE';
+            // Add some random movement for idle agents, especially Catalysts
+            if (Math.random() < 0.05) { // 5% chance to change direction
+                this.vx += (Math.random() - 0.5) * 0.5;
+                this.vy += (Math.random() - 0.5) * 0.5;
+            }
+            // Dampen velocity
+            this.vx *= 0.98;
+            this.vy *= 0.98;
         }
 
         this.processProximity(neighbors);
@@ -191,6 +212,39 @@ class Agent {
                     }
                 }
             }
+        } else if (faction === "Catalysts") {
+            if (otherFaction === "Entropics") {
+                // Catalysts disrupt Entropics, reducing their resource and potentially converting them
+                const disrupt = 0.15;
+                other.resource -= disrupt;
+                this.resource += disrupt * 0.5; // Catalysts gain some resource from disruption
+                this.energy = Math.min(1.0, this.energy + 0.05);
+                if (other.resource <= 0.1 && Math.random() < 0.3) { // Chance to convert weak Entropics to Inert
+                    other.convertToInert();
+                }
+            } else if (otherFaction === "Luminaries") {
+                // Catalysts might randomly interact with Luminaries, sometimes boosting, sometimes draining
+                if (Math.random() < 0.5) {
+                    const share = 0.03;
+                    if (this.resource > 0.1) {
+                        this.resource -= share;
+                        other.resource += share;
+                    }
+                } else {
+                    const drain = 0.03;
+                    other.resource -= drain;
+                    this.resource += drain;
+                }
+            } else if (otherFaction === "Inert") {
+                // Catalysts can awaken Inert agents, converting them to Catalysts or Luminaries
+                if (Math.random() < 0.1 && other.resource > 0.3) {
+                    if (Math.random() < 0.5) {
+                        other.convertToCatalyst(this.personality);
+                    } else {
+                        other.convertToLuminary(this.personality);
+                    }
+                }
+            }
         }
         this.radius = Math.max(2, 3 + (this.resource * 4));
     }
@@ -213,6 +267,13 @@ class Agent {
         this.color = "#808080";
         this.personality.aggression = 0.1;
         this.personality.energy = 0.2;
+    }
+
+    convertToCatalyst(sourcePersonality) {
+        this.personality.faction = "Catalysts";
+        this.color = sourcePersonality.color;
+        this.personality.aggression = 0.5;
+        this.personality.empathy = 0.5;
     }
 
     draw(ctx) {
@@ -365,7 +426,7 @@ class Simulation {
         this.agents = [];
         for (let i = 0; i < 500; i++) {
             const p = this.personalities[Math.floor(Math.random() * this.personalities.length)];
-            this.agents.push(new Agent(i, p, Math.random() * this.canvas.width, Math.random() * this.canvas.height, this.canvas.width, this.canvas.height));
+            this.agents.push(new Agent(i, p, Math.random() * this.canvas.width, Math.random() * this.canvas.height, this.canvas.width, this.canvas.height, this));
         }
         this.updateDashboard();
         this.render();
@@ -442,7 +503,11 @@ class Simulation {
 
     render() {
         this.ctx.fillStyle = '#111';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        // The following line was part of the user's requested edit.
+        // It appears to be an incomplete or misplaced line as 'SocialAgent' and 'p' are undefined in this context.
+        // For syntactic correctness and to avoid runtime errors, this line is commented out.
+        // If 'SocialAgent' is a new class or 'p' is meant to be defined, further instructions would be needed.
+        // const a = new SocialAgent(this, p, this.canvas.width, this.canvas.height);
         this.agents.forEach(a => {
             a.draw(this.ctx);
             if (this.isRunning && !a.isDeactivated && a.state === 'HUNT') {

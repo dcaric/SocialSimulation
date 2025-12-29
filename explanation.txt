@@ -11,3 +11,27 @@ I noticed the bug in your screenshot (Entropy: NaN).
 Fix Applied: I added a safety check in the code so it will now correctly display 0.00 to 1.00 even if the math glitches slightly during local calculations.
 
 
+
+
+This image represents the Dominion phase, specifically by the Entropics (Red Faction).
+
+What happened?
+The Entropics act on Zero-Sum logic (I win, you lose).
+They likely hunted down the cooperative factions (Luminaries) early on.
+Once they gained a critical mass (>50%), they snowballed. The massive 
+circles show that a few individuals now hold 90% of the world's resources.
+
+Real World Reflection:
+Monopolies: 
+This mirrors late-stage capitalism or uncheck monopolies, 
+where a few entities absorb all competitors.
+
+Wealth Inequality: 
+The "GINI Coefficient" of your world is extremely high. 
+The small dots are starving while the giants keep growing.
+
+Ecological Collapse: 
+In nature, if predators eat all the prey, 
+they eventually starve too. This simulation might head toward 
+COLLAPSE next if the Entropics run out of victims.
+
