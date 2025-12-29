@@ -16,7 +16,7 @@
         {
           "id": 1,
           "name": "The Void",
-          "color": "#000000",
+          "color": "#2A0000",
           "aggression": 1.0,
           "empathy": 0.0,
           "energy": 0.2,
@@ -25,7 +25,7 @@
         {
           "id": 2,
           "name": "Berserker",
-          "color": "#1A0000",
+          "color": "#FF0000",
           "aggression": 0.9,
           "empathy": 0.1,
           "energy": 0.9,
@@ -34,7 +34,7 @@
         {
           "id": 3,
           "name": "Leech",
-          "color": "#222222",
+          "color": "#8B0000",
           "aggression": 0.4,
           "empathy": 0.2,
           "energy": 0.4,
@@ -43,7 +43,7 @@
         {
           "id": 4,
           "name": "Shadow",
-          "color": "#333333",
+          "color": "#4A0404",
           "aggression": 0.2,
           "empathy": 0.1,
           "energy": 0.7,
@@ -52,7 +52,7 @@
         {
           "id": 5,
           "name": "Corruptor",
-          "color": "#050505",
+          "color": "#800000",
           "aggression": 0.8,
           "empathy": 0.0,
           "energy": 0.5,
@@ -61,7 +61,7 @@
         {
           "id": 6,
           "name": "Viral",
-          "color": "#0A0A0A",
+          "color": "#B22222",
           "aggression": 0.7,
           "empathy": 0.1,
           "energy": 0.8,
@@ -70,7 +70,7 @@
         {
           "id": 7,
           "name": "Nihilist",
-          "color": "#111111",
+          "color": "#3D0000",
           "aggression": 0.3,
           "empathy": 0.0,
           "energy": 0.1,
@@ -79,7 +79,7 @@
         {
           "id": 8,
           "name": "Specter",
-          "color": "#1C1C1C",
+          "color": "#5C0E0E",
           "aggression": 0.5,
           "empathy": 0.1,
           "energy": 0.6,
@@ -88,7 +88,7 @@
         {
           "id": 9,
           "name": "Obsidian",
-          "color": "#020202",
+          "color": "#1F0505",
           "aggression": 0.1,
           "empathy": 0.0,
           "energy": 0.0,
@@ -97,7 +97,7 @@
         {
           "id": 10,
           "name": "Reaper",
-          "color": "#000005",
+          "color": "#660000",
           "aggression": 0.9,
           "empathy": 0.0,
           "energy": 1.0,
@@ -301,7 +301,7 @@
         {
           "id": 31,
           "name": "Citizen",
-          "color": "#808080",
+          "color": "#B0C4DE",
           "aggression": 0.2,
           "empathy": 0.5,
           "energy": 0.3,
@@ -310,7 +310,7 @@
         {
           "id": 32,
           "name": "Wall",
-          "color": "#444444",
+          "color": "#4682B4",
           "aggression": 0.0,
           "empathy": 0.1,
           "energy": 0.0,
@@ -319,7 +319,7 @@
         {
           "id": 33,
           "name": "Skeptic",
-          "color": "#A9A9A9",
+          "color": "#708090",
           "aggression": 0.1,
           "empathy": 0.3,
           "energy": 0.2,
@@ -328,7 +328,7 @@
         {
           "id": 34,
           "name": "Follower",
-          "color": "#D3D3D3",
+          "color": "#87CEFA",
           "aggression": 0.1,
           "empathy": 0.5,
           "energy": 0.5,
@@ -337,7 +337,7 @@
         {
           "id": 35,
           "name": "Static",
-          "color": "#696969",
+          "color": "#ADD8E6",
           "aggression": 0.0,
           "empathy": 0.5,
           "energy": 0.1,
@@ -346,7 +346,7 @@
         {
           "id": 36,
           "name": "Anchor",
-          "color": "#2F4F4F",
+          "color": "#5F9EA0",
           "aggression": 0.1,
           "empathy": 0.6,
           "energy": 0.0,
@@ -355,7 +355,7 @@
         {
           "id": 37,
           "name": "Vessel",
-          "color": "#BEBEBE",
+          "color": "#E0FFFF",
           "aggression": 0.1,
           "empathy": 0.9,
           "energy": 0.4,
@@ -364,7 +364,7 @@
         {
           "id": 38,
           "name": "Drone",
-          "color": "#778899",
+          "color": "#6495ED",
           "aggression": 0.3,
           "empathy": 0.3,
           "energy": 0.6,
@@ -373,7 +373,7 @@
         {
           "id": 39,
           "name": "Buffer",
-          "color": "#708090",
+          "color": "#00CED1",
           "aggression": 0.0,
           "empathy": 0.5,
           "energy": 0.3,
@@ -382,7 +382,7 @@
         {
           "id": 40,
           "name": "The Average",
-          "color": "#777777",
+          "color": "#1E90FF",
           "aggression": 0.5,
           "empathy": 0.5,
           "energy": 0.5,

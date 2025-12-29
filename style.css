@@ -538,3 +538,20 @@ input[type=range] {
     background-color: currentColor; 
     flex-shrink: 0;
 }
+
+/* Report Modal Styles */
+.report-text {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #eee;
+    white-space: pre-wrap; /* Preserve line breaks */
+}
+
+.report-highlight {
+    color: var(--highlight-color);
+    font-weight: bold;
+}

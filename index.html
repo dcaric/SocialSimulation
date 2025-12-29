@@ -16,6 +16,7 @@
             <div class="header-main">
                 <h1>Social Simulation</h1>
                 <div class="header-controls">
+                    <button id="reportBtn" class="icon-btn" title="Generate Status Report">📝</button>
                     <button id="legendBtn" class="icon-btn" title="Color Legend">📖</button>
                     <button id="infoBtn" class="icon-btn" title="Faction Information">ⓘ</button>
                     <button id="sidebarToggle" class="icon-btn mobile-only" title="Toggle Dashboard">☰</button>
@@ -193,6 +194,15 @@
             <h2>Visual Legend</h2>
             <div id="legendContainer" class="legend-grid-container">
                 <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+    <div id="reportModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-btn-report close-btn">&times;</span>
+            <h2>Simulation Status Report</h2>
+            <div id="reportContainer" class="report-text">
+                <!-- Dynamically populated -->
             </div>
         </div>
     </div>
