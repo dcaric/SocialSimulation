@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Simulation: Digital Physics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="header-main">
+                <h1>Social Simulation</h1>
+                <button id="infoBtn" class="icon-btn" title="Faction Information">ⓘ</button>
+            </div>
+            <p class="subtitle">Exploring Emergent Behaviors & Digital Physics</p>
+        </header>
+
+        <main>
+            <div class="simulation-container">
+                <canvas id="simCanvas"></canvas>
+                <div class="controls glass">
+                    <button id="startBtn" class="primary-btn">START SIMULATION</button>
+                    <button id="restartBtn" class="secondary-btn">RESTART</button>
+                    <div class="stats-mini">
+                        <span id="popCount">Agents: 500</span>
+                        <span id="entropyLevel">Entropy: 0.50</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="dashboard glass">
+                <section class="faction-stats">
+                    <h3>Faction Distribution</h3>
+                    <div class="stat-row" data-faction="Entropics">
+                        <div class="label">Entropics</div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 25%; background: var(--entropic-color);"></div>
+                        </div>
+                        <div class="value">25%</div>
+                    </div>
+                    <div class="stat-row" data-faction="Luminaries">
+                        <div class="label">Luminaries</div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 25%; background: var(--luminary-color);"></div>
+                        </div>
+                        <div class="value">25%</div>
+                    </div>
+                    <div class="stat-row" data-faction="Catalysts">
+                        <div class="label">Catalysts</div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 25%; background: var(--catalyst-color);"></div>
+                        </div>
+                        <div class="value">25%</div>
+                    </div>
+                    <div class="stat-row" data-faction="Inert">
+                        <div class="label">Inert</div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: 25%; background: var(--inert-color);"></div>
+                        </div>
+                        <div class="value">25%</div>
+                    </div>
+                </section>
+
+                <section class="log-container">
+                    <h3>Activity Log</h3>
+                    <div id="simLog" class="log-content">
+                        <p class="log-entry">Waiting for genesis...</p>
+                    </div>
+                </section>
+            </aside>
+        </main>
+
+        <footer>
+            <div class="observer-powers">
+                <button id="glitchBtn" title="Trigger Deja Vu Pulse">⚡ GLITCH</button>
+                <button id="observerBtn" title="Trigger Quantum Collapse" style="margin-left: 10px;">👁️
+                    OBSERVE</button>
+                <div class="speed-control">
+                    <label>Sim Speed</label>
+                    <input type="range" id="speedSlider" min="0.1" max="3" step="0.1" value="1">
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="infoModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-btn">&times;</span>
+            <h2>Faction Intelligence</h2>
+            <div class="theory-section"
+                style="margin-bottom: 2rem; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 8px; border: 1px solid var(--glass-border);">
+                <h3 style="color: var(--accent-color); margin-bottom: 0.5rem;">The Core Theory</h3>
+                <p style="font-size: 0.9rem; color: #ccc; line-height: 1.6;">
+                    This project is a <strong>Social Simulation</strong> based on the principles of <strong>Agent-Based
+                        Modeling (ABM)</strong> and **Digital Physics**. It explores the idea that complex, lifelike
+                    patterns in our reality can emerge from a few simple algorithmic instructions. By observing 500
+                    agents with 40 personality types, we can witness how sub-cultures, segregation, and "Heat Death"
+                    occur naturally in a closed system.
+                </p>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 1rem; font-style: italic;">
+                    The 40 personalities are divided into 10 specialized variations for each of the 4 factions. For
+                    example, within the <strong>Entropics</strong>, you'll find everything from silent
+                    <strong>Leeches</strong> to high-speed <strong>Reapers</strong>, each with different rates of
+                    aggression and energy consumption.
+                </p>
+            </div>
+            <div class="faction-grid">
+                <div class="faction-card" style="border-top: 4px solid var(--entropic-color);">
+                    <h3>🌑 Entropics</h3>
+                    <p><strong>Logic:</strong> Zero-Sum Gain / Drain</p>
+                    <p>Predators that seek high-value targets to consume or convert. They represent decay and entropy.
+                    </p>
+                </div>
+                <div class="faction-card" style="border-top: 4px solid var(--luminary-color);">
+                    <h3>☀️ Luminaries</h3>
+                    <p><strong>Logic:</strong> Positive-Sum / Synergistic</p>
+                    <p>Defenders that form stable clusters to heal and protect. They represent order and optimization.
+                    </p>
+                </div>
+                <div class="faction-card" style="border-top: 4px solid var(--catalyst-color);">
+                    <h3>🧪 Catalysts</h3>
+                    <p><strong>Logic:</strong> Quantum Chaos / Mutation</p>
+                    <p>Wildcards that trigger random state changes and physics glitches. They prevent stagnation.</p>
+                </div>
+                <div class="faction-card" style="border-top: 4px solid var(--inert-color);">
+                    <h3>🔘 Inert</h3>
+                    <p><strong>Logic:</strong> Background / Resource</p>
+                    <p>The base population. They are the stable fabric of the world, easily influenced by dominant
+                        forces.</p>
+                </div>
+            </div>
+            <div class="glitch-explanation"
+                style="margin-top: 2rem; padding: 1rem; border-left: 2px solid #ff00ff; background: rgba(255, 0, 255, 0.05); border-radius: 4px;">
+                <h3 style="color: #ff00ff; margin-bottom: 0.5rem;">⚡ The Glitch (Observer Intervention)</h3>
+                <p style="font-size: 0.85rem; color: #aaa; line-height: 1.5;">
+                    Inspired by simulation theory and <strong>"Deja Vu"</strong>, the GLITCH button mimics a system-wide
+                    race condition. It rewrites the <strong>spatial coordinates</strong> of random agents, effectively
+                    resetting their perception of time and space. Use it to break up "Heat Death" or to rescue a dying
+                    faction.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="simulation.js"></script>
+</body>
+
+</html>

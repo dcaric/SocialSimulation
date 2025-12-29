@@ -1,0 +1,378 @@
+:root {
+    --bg-color: #0d0d0f;
+    --text-color: #e0e0e0;
+    --accent-color: #4f46e5;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    --entropic-color: #ff4d4d;
+    /* Using a visible dark red instead of true black for visibility */
+    --luminary-color: #ffd700;
+    --catalyst-color: #39ff14;
+    --inert-color: #808080;
+
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    height: 100vh;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 1rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.header-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.icon-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: #888;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+    color: #fff;
+    border-color: #fff;
+    transform: rotate(15deg);
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #fff, #888);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 0.2rem;
+}
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1rem;
+    min-height: 0;
+    /* Important for flex child sizing */
+}
+
+.simulation-container {
+    position: relative;
+    background: #000;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+#simCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.controls {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.primary-btn {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stats-mini {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: #aaa;
+    border-left: 1px solid var(--glass-border);
+    padding-left: 1rem;
+}
+
+.dashboard {
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.stat-row {
+    margin-bottom: 1rem;
+}
+
+.stat-row .label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    margin: 2% auto;
+    /* Reduced margin to fit more content */
+    padding: 2rem;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    /* Ensure modal stays within viewport */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    border-radius: 16px;
+    animation: modalSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar for Modal */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 3px;
+}
+
+@keyframes modalSlide {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 2rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.modal-content h2 {
+    font-family: var(--font-heading);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.faction-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.2rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.faction-card h3 {
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.faction-card p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #bbb;
+}
+
+.faction-card p strong {
+    color: #fff;
+}
+
+.bar-container {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.stat-row .value {
+    font-size: 0.75rem;
+    text-align: right;
+    color: #666;
+}
+
+.log-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.log-content {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.log-entry {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer {
+    padding-top: 1rem;
+}
+
+.observer-powers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+#glitchBtn {
+    background: none;
+    border: 1px solid #ff00ff;
+    color: #ff00ff;
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+}
+
+#glitchBtn:hover {
+    background: rgba(255, 0, 255, 0.1);
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.speed-control label {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+input[type=range] {
+    accent-color: var(--accent-color);
+}

@@ -1,0 +1,394 @@
+{
+  "simulation_metadata": {
+    "version": "1.0",
+    "total_types": 40,
+    "factions": [
+      "Entropics",
+      "Luminaries",
+      "Catalysts",
+      "Inert"
+    ]
+  },
+  "personalities": [
+    {
+      "faction": "Entropics",
+      "types": [
+        {
+          "id": 1,
+          "name": "The Void",
+          "color": "#000000",
+          "aggression": 1.0,
+          "empathy": 0.0,
+          "energy": 0.2,
+          "logic": "Absorbs all nearby light values silently."
+        },
+        {
+          "id": 2,
+          "name": "Berserker",
+          "color": "#1A0000",
+          "aggression": 0.9,
+          "empathy": 0.1,
+          "energy": 0.9,
+          "logic": "High-speed collision; converts on impact."
+        },
+        {
+          "id": 3,
+          "name": "Leech",
+          "color": "#222222",
+          "aggression": 0.4,
+          "empathy": 0.2,
+          "energy": 0.4,
+          "logic": "Slowly drains energy from neighbors over time."
+        },
+        {
+          "id": 4,
+          "name": "Shadow",
+          "color": "#333333",
+          "aggression": 0.2,
+          "empathy": 0.1,
+          "energy": 0.7,
+          "logic": "Avoids Luminaries; targets Inert dots only."
+        },
+        {
+          "id": 5,
+          "name": "Corruptor",
+          "color": "#050505",
+          "aggression": 0.8,
+          "empathy": 0.0,
+          "energy": 0.5,
+          "logic": "Turns Catalysts into Entropics."
+        },
+        {
+          "id": 6,
+          "name": "Viral",
+          "color": "#0A0A0A",
+          "aggression": 0.7,
+          "empathy": 0.1,
+          "energy": 0.8,
+          "logic": "Spreads 'darkness' through chain reactions."
+        },
+        {
+          "id": 7,
+          "name": "Nihilist",
+          "color": "#111111",
+          "aggression": 0.3,
+          "empathy": 0.0,
+          "energy": 0.1,
+          "logic": "Reduces the energy of any dot it touches to zero."
+        },
+        {
+          "id": 8,
+          "name": "Specter",
+          "color": "#1C1C1C",
+          "aggression": 0.5,
+          "empathy": 0.1,
+          "energy": 0.6,
+          "logic": "Can pass through Inert dots without colliding."
+        },
+        {
+          "id": 9,
+          "name": "Obsidian",
+          "color": "#020202",
+          "aggression": 0.1,
+          "empathy": 0.0,
+          "energy": 0.0,
+          "logic": "A heavy gravity well that pulls dots toward it."
+        },
+        {
+          "id": 10,
+          "name": "Reaper",
+          "color": "#000005",
+          "aggression": 0.9,
+          "empathy": 0.0,
+          "energy": 1.0,
+          "logic": "Deletes dots instead of converting them."
+        }
+      ]
+    },
+    {
+      "faction": "Luminaries",
+      "types": [
+        {
+          "id": 11,
+          "name": "The Sun",
+          "color": "#FFD700",
+          "aggression": 0.1,
+          "empathy": 1.0,
+          "energy": 0.1,
+          "logic": "Massive radius of healing/light influence."
+        },
+        {
+          "id": 12,
+          "name": "Monk",
+          "color": "#FFFACD",
+          "aggression": 0.0,
+          "empathy": 0.9,
+          "energy": 0.2,
+          "logic": "High resistance to conversion; stays static."
+        },
+        {
+          "id": 13,
+          "name": "Beacon",
+          "color": "#FFFFFF",
+          "aggression": 0.5,
+          "empathy": 0.8,
+          "energy": 0.5,
+          "logic": "Actively seeks out Dark dots to convert them."
+        },
+        {
+          "id": 14,
+          "name": "Protector",
+          "color": "#F0E68C",
+          "aggression": 0.6,
+          "empathy": 0.7,
+          "energy": 0.6,
+          "logic": "Circles around clusters of Inert dots."
+        },
+        {
+          "id": 15,
+          "name": "Messenger",
+          "color": "#EEDD82",
+          "aggression": 0.2,
+          "empathy": 0.9,
+          "energy": 0.9,
+          "logic": "Fast mover; spreads light value across the map."
+        },
+        {
+          "id": 16,
+          "name": "Aura",
+          "color": "#FAFAD2",
+          "aggression": 0.1,
+          "empathy": 0.8,
+          "energy": 0.4,
+          "logic": "Boosts the energy of nearby Light dots."
+        },
+        {
+          "id": 17,
+          "name": "Prism",
+          "color": "#FFFFE0",
+          "aggression": 0.3,
+          "empathy": 0.7,
+          "energy": 0.7,
+          "logic": "Splits into two smaller Light dots if 'attacked'."
+        },
+        {
+          "id": 18,
+          "name": "Guardian",
+          "color": "#B8860B",
+          "aggression": 0.8,
+          "empathy": 0.6,
+          "energy": 0.5,
+          "logic": "Aggressively repels Entropics from its zone."
+        },
+        {
+          "id": 19,
+          "name": "Starlight",
+          "color": "#F5F5DC",
+          "aggression": 0.1,
+          "empathy": 0.5,
+          "energy": 1.0,
+          "logic": "Teleports to random locations to prevent total darkness."
+        },
+        {
+          "id": 20,
+          "name": "Sage",
+          "color": "#DAA520",
+          "aggression": 0.0,
+          "empathy": 1.0,
+          "energy": 0.3,
+          "logic": "Increases empathy stats of nearby dots permanently."
+        }
+      ]
+    },
+    {
+      "faction": "Catalysts",
+      "types": [
+        {
+          "id": 21,
+          "name": "Chaos",
+          "color": "#FF00FF",
+          "aggression": 0.5,
+          "empathy": 0.5,
+          "energy": 1.0,
+          "logic": "Randomizes the personality of any dot it hits."
+        },
+        {
+          "id": 22,
+          "name": "Glitch",
+          "color": "#00FFFF",
+          "aggression": 0.2,
+          "empathy": 0.2,
+          "energy": 0.8,
+          "logic": "Momentarily breaks physics (teleports neighbors)."
+        },
+        {
+          "id": 23,
+          "name": "Mutant",
+          "color": "#39FF14",
+          "aggression": 0.7,
+          "empathy": 0.3,
+          "energy": 0.6,
+          "logic": "Changes faction based on whichever color is dominant."
+        },
+        {
+          "id": 24,
+          "name": "Spark",
+          "color": "#FF4500",
+          "aggression": 0.9,
+          "empathy": 0.5,
+          "energy": 0.9,
+          "logic": "Explodes on contact, pushing all dots away."
+        },
+        {
+          "id": 25,
+          "name": "Inverter",
+          "color": "#7FFF00",
+          "aggression": 0.5,
+          "empathy": 0.5,
+          "energy": 0.4,
+          "logic": "Swaps the light/dark value of the target."
+        },
+        {
+          "id": 26,
+          "name": "Shifter",
+          "color": "#9400D3",
+          "aggression": 0.4,
+          "empathy": 0.4,
+          "energy": 0.7,
+          "logic": "Mimics the personality of the last dot it touched."
+        },
+        {
+          "id": 27,
+          "name": "Pulse",
+          "color": "#FF1493",
+          "aggression": 0.1,
+          "empathy": 0.1,
+          "energy": 0.5,
+          "logic": "Periodically sends a wave that resets velocities."
+        },
+        {
+          "id": 28,
+          "name": "Drifter",
+          "color": "#00BFFF",
+          "aggression": 0.2,
+          "empathy": 0.5,
+          "energy": 0.9,
+          "logic": "Follows the mouse/observer cursor."
+        },
+        {
+          "id": 29,
+          "name": "Anomalous",
+          "color": "#ADFF2F",
+          "aggression": 0.6,
+          "empathy": 0.6,
+          "energy": 0.6,
+          "logic": "Ignores the borders of the simulation window."
+        },
+        {
+          "id": 30,
+          "name": "Catalyst-X",
+          "color": "#FF6347",
+          "aggression": 1.0,
+          "empathy": 1.0,
+          "energy": 1.0,
+          "logic": "Forces an interaction regardless of dot types."
+        }
+      ]
+    },
+    {
+      "faction": "Inert",
+      "types": [
+        {
+          "id": 31,
+          "name": "Citizen",
+          "color": "#808080",
+          "aggression": 0.2,
+          "empathy": 0.5,
+          "energy": 0.3,
+          "logic": "Standard behavior; easily influenced."
+        },
+        {
+          "id": 32,
+          "name": "Wall",
+          "color": "#444444",
+          "aggression": 0.0,
+          "empathy": 0.1,
+          "energy": 0.0,
+          "logic": "Immovable; acts as a physical barrier."
+        },
+        {
+          "id": 33,
+          "name": "Skeptic",
+          "color": "#A9A9A9",
+          "aggression": 0.1,
+          "empathy": 0.3,
+          "energy": 0.2,
+          "logic": "High resistance to both Light and Dark influence."
+        },
+        {
+          "id": 34,
+          "name": "Follower",
+          "color": "#D3D3D3",
+          "aggression": 0.1,
+          "empathy": 0.5,
+          "energy": 0.5,
+          "logic": "Always moves toward the largest cluster of dots."
+        },
+        {
+          "id": 35,
+          "name": "Static",
+          "color": "#696969",
+          "aggression": 0.0,
+          "empathy": 0.5,
+          "energy": 0.1,
+          "logic": "Resets its own position if moved too far."
+        },
+        {
+          "id": 36,
+          "name": "Anchor",
+          "color": "#2F4F4F",
+          "aggression": 0.1,
+          "empathy": 0.6,
+          "energy": 0.0,
+          "logic": "Slows down any dot that enters its radius."
+        },
+        {
+          "id": 37,
+          "name": "Vessel",
+          "color": "#BEBEBE",
+          "aggression": 0.1,
+          "empathy": 0.9,
+          "energy": 0.4,
+          "logic": "Can hold and transport Light value for others."
+        },
+        {
+          "id": 38,
+          "name": "Drone",
+          "color": "#778899",
+          "aggression": 0.3,
+          "empathy": 0.3,
+          "energy": 0.6,
+          "logic": "Moves in perfectly straight lines until it hits a wall."
+        },
+        {
+          "id": 39,
+          "name": "Buffer",
+          "color": "#708090",
+          "aggression": 0.0,
+          "empathy": 0.5,
+          "energy": 0.3,
+          "logic": "Neutralizes any interaction logic within its radius."
+        },
+        {
+          "id": 40,
+          "name": "The Average",
+          "color": "#777777",
+          "aggression": 0.5,
+          "empathy": 0.5,
+          "energy": 0.5,
+          "logic": "The baseline for all mathematical comparisons."
+        }
+      ]
+    }
+  ]
+}
