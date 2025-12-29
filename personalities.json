@@ -301,7 +301,7 @@
         {
           "id": 31,
           "name": "Citizen",
-          "color": "#B0C4DE",
+          "color": "#bae6fd",
           "aggression": 0.2,
           "empathy": 0.5,
           "energy": 0.3,
@@ -310,7 +310,7 @@
         {
           "id": 32,
           "name": "Wall",
-          "color": "#4682B4",
+          "color": "#0ea5e9",
           "aggression": 0.0,
           "empathy": 0.1,
           "energy": 0.0,
@@ -319,7 +319,7 @@
         {
           "id": 33,
           "name": "Skeptic",
-          "color": "#708090",
+          "color": "#7dd3fc",
           "aggression": 0.1,
           "empathy": 0.3,
           "energy": 0.2,
@@ -328,7 +328,7 @@
         {
           "id": 34,
           "name": "Follower",
-          "color": "#87CEFA",
+          "color": "#38bdf8",
           "aggression": 0.1,
           "empathy": 0.5,
           "energy": 0.5,
@@ -337,7 +337,7 @@
         {
           "id": 35,
           "name": "Static",
-          "color": "#ADD8E6",
+          "color": "#e0f2fe",
           "aggression": 0.0,
           "empathy": 0.5,
           "energy": 0.1,
@@ -346,7 +346,7 @@
         {
           "id": 36,
           "name": "Anchor",
-          "color": "#5F9EA0",
+          "color": "#0284c7",
           "aggression": 0.1,
           "empathy": 0.6,
           "energy": 0.0,
@@ -355,7 +355,7 @@
         {
           "id": 37,
           "name": "Vessel",
-          "color": "#E0FFFF",
+          "color": "#f0f9ff",
           "aggression": 0.1,
           "empathy": 0.9,
           "energy": 0.4,
@@ -364,7 +364,7 @@
         {
           "id": 38,
           "name": "Drone",
-          "color": "#6495ED",
+          "color": "#075985",
           "aggression": 0.3,
           "empathy": 0.3,
           "energy": 0.6,
@@ -373,7 +373,7 @@
         {
           "id": 39,
           "name": "Buffer",
-          "color": "#00CED1",
+          "color": "#0ea5e9",
           "aggression": 0.0,
           "empathy": 0.5,
           "energy": 0.3,

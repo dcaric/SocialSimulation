@@ -8,8 +8,8 @@
     --shadow-color: #ff4d4d;
     /* Using a visible dark red instead of true black for visibility */
     --luminary-color: #ffd700;
-    --catalyst-color: #39ff14;
-    --inert-color: #808080;
+    --catalyst-color: #bf00ff;
+    --inert-color: #7dd3fc;
 
     --font-main: 'Inter', sans-serif;
     --font-heading: 'Outfit', sans-serif;
